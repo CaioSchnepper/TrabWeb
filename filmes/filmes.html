@@ -4,21 +4,168 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <title>Trab Web</title>
+    <title>Sistema Cinema - Filmes</title>
 </head>
 <body class="h-100 bg-dark">
 	<h1 class="bg-light text-center p-4">
-		Sistema
+		<a href="../index.html" class="text-dark">Sistema</a>
 		<button type="button" class="btn btn-danger float-right">Sair</button>
 	</h1>
 	<div class="container-fluid h-75 d-flex text-center align-items-center">
 		<div class="container text-light ">
-
+			<h2 class="m-4">Filmes</h2>
+			<table class="table table-dark table-hover">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Título</th>
+						<th scope="col">Lançamento</th>
+						<th scope="col">Idioma</th>
+						<th scope="col">Duração</th>
+						<th scope="col">Sinopse</th>
+						<th scope="col">Poster</th>
+						<th scope="col">Trailer</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>Vingadores: Ultimato</td>
+						<td>2019</td>
+						<td>pt-BR</td>
+						<td>3h 2m</td>
+						<td>Após Thanos</td>
+						<a href="http://t0.gstatic.com/images?q=tbn:ANd9GcQMwtU95JygcmCq4e3XPpL9W0ATjGFoQCQm16dbpIp7BM36B7lH" target="_blank"><td>Link</td></a>
+						<a href="https://youtu.be/-4VRbM-UHew" target="_blank"><td>Link</td></a>
+						<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalAlterar">Alterar dados</button></td>
+						<td><button type="button" class="btn btn-danger">Apagar</button></td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Vingadores: Ultimato</td>
+						<td>2019</td>
+						<td>pt-BR</td>
+						<td>3h 2m</td>
+						<td>Após Thanos</td>
+						<a href="http://t0.gstatic.com/images?q=tbn:ANd9GcQMwtU95JygcmCq4e3XPpL9W0ATjGFoQCQm16dbpIp7BM36B7lH" target="_blank"><td>Link</td></a>
+						<a href="https://youtu.be/-4VRbM-UHew" target="_blank"><td>Link</td></a>
+						<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalAlterar">Alterar dados</button></td>
+						<td><button type="button" class="btn btn-danger">Apagar</button></td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Vingadores: Ultimato</td>
+						<td>2019</td>
+						<td>pt-BR</td>
+						<td>3h 2m</td>
+						<td>Após Thanos</td>
+						<a href="http://t0.gstatic.com/images?q=tbn:ANd9GcQMwtU95JygcmCq4e3XPpL9W0ATjGFoQCQm16dbpIp7BM36B7lH" target="_blank"><td>Link</td></a>
+						<a href="https://youtu.be/-4VRbM-UHew" target="_blank"><td>Link</td></a>
+						<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalAlterar">Alterar dados</button></td>
+						<td><button type="button" class="btn btn-danger">Apagar</button></td>
+					</tr>
+				</tbody>
+			</table>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAdicionar">Adicionar novo filme</button>
 		</div>
 	</div>
 	
+	<div class="modal" id="modalAlterar" tabindex="-1" role="dialog" aria-labelledby="labelModal" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content text-center">
+				<div class="modal-header">
+					<h5 class="modal-title" id="labelModal">Alterar dados</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<form id="formAlterar">
+							<div class="form-group">
+							 	 <label for="inputEditTitulo">Insira o novo título</label>
+							 	 <input type="text" class="form-control" id="inputEditTitulo">
+							</div>
+							<div class="form-group">
+								<label for="inputEditLancamento">Insira o novo ano de lançamento</label>
+								<input type="number" class="form-control" id="inputEditLancamento">
+							</div>
+							<div class="form-group">
+								<label for="inputEditIdioma">Insira o novo idioma</label>
+								<input type="text" class="form-control" id="inputEditIdioma">
+							</div>
+							<div class="form-group">
+								<label for="inputEditDuracao">Insira a nova duração</label>
+								<input type="text" class="form-control" id="inputEditDuracao">
+							</div>
+							<div class="form-group">
+								<label for="inputEditSinopse">Insira a nova sinopse</label>
+								<textarea class="form-control" id="inputEditSinopse" rows="3" cols="30"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="inputEditPoster">Insira o novo link do poster</label>
+								<input type="text" class="form-control" id="inputEditPoster">
+							</div> 
+							<div class="form-group">
+								<label for="inputEditTrailer">Insira o novo link do trailer</label>
+								<input type="text" class="form-control" id="inputEditTrailer">
+							</div>
+							<button type="submit" class="btn btn-primary bg-dark border-dark">Enviar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="modalAdicionar" tabindex="-1" role="dialog" aria-labelledby="labelModal" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content text-center">
+				<div class="modal-header">
+					<h5 class="modal-title" id="labelModal">Adicionar novo filme</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<form id="formAdicionar">
+							<div class="form-group">
+								<label for="inputAddTitulo">Insira o título</label>
+								<input type="text" class="form-control" id="inputAddTitulo">
+						  </div>
+						  <div class="form-group">
+							  <label for="inputAddLancamento">Insira o ano de lançamento</label>
+							  <input type="number" class="form-control" id="inputAddLancamento">
+						  </div>
+						  <div class="form-group">
+							  <label for="inputAddIdioma">Insira o idioma</label>
+							  <input type="text" class="form-control" id="inputAddIdioma">
+						  </div>
+						  <div class="form-group">
+							  <label for="inputAddDuracao">Insira a duração</label>
+							  <input type="text" class="form-control" id="inputAddDuracao">
+						  </div>
+						  <div class="form-group">
+							  <label for="inputAddSinopse">Insira a sinopse</label>
+							  <textarea class="form-control" id="inputAddSinopse" rows="3" cols="30"></textarea>
+						  </div>
+						  <div class="form-group">
+							  <label for="inputAddPoster">Insira o link do poster</label>
+							  <input type="text" class="form-control" id="inputAddPoster">
+						  </div> 
+						  <div class="form-group">
+							  <label for="inputAddTrailer">Insira o link do trailer</label>
+							  <input type="text" class="form-control" id="inputAddTrailer">
+						  </div>
+							<button type="submit" class="btn btn-primary bg-dark border-dark">Enviar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<footer class="bg-light text-center p-1 mt-2">Desenvolvido pelos mano da quebrada</footer>
-	
 	<script src="../js/jquery-3.4.1.js"></script>
 	<script src="../js/bootstrap.bundle.min.js"></script>
 </body>
