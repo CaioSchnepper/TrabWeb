@@ -1,0 +1,72 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "usuario": "admin",
+      "senha": "admin"
+    }
+  ],
+  "generos": [
+    {
+      "id": 1,
+      "genero": "Comédia"
+    },
+    {
+      "genero": "Ação",
+      "id": 2
+    }
+  ],
+  "salas": [
+    {
+      "id": 1,
+      "lotacao_maxima": 30
+    }
+  ],
+  "tipoingresso": [
+    {
+      "id": 1,
+      "descricao": "Inteira",
+      "valor": 20
+    },
+    {
+      "id": 2,
+      "descricao": "Meia",
+      "valor": 10
+    }
+  ],
+  "filmes": [
+    {
+      "id": 1,
+      "titulo": "Vingadores: Ultimato",
+      "ano_lancamento": 2019,
+      "idioma": "pt-BR",
+      "duracao": "3h 2m",
+      "sinopse": "Após Thanos eliminar metade das criaturas vivas, os Vingadores têm de lidar com a perda de amigos e entes queridos. Com Tony Stark vagando perdido no espaço sem água e comida, Steve Rogers e Natasha Romanov lideram a resistência contra o titã louco.",
+      "poster_link": "http://t0.gstatic.com/images?q=tbn:ANd9GcQMwtU95JygcmCq4e3XPpL9W0ATjGFoQCQm16dbpIp7BM36B7lH",
+      "trailer_link": "https://youtu.be/-4VRbM-UHew"
+    }
+  ],
+  "emcartaz": [
+    {
+      "id": 1,
+      "sala_id": 1,
+      "filme_id": 1,
+      "horario": "15 horas",
+      "ativo": true
+    }
+  ],
+  "bilheterias": [
+    {
+      "id": 1,
+      "emcartaz_id": 1,
+      "tipoingresso_id": 1,
+      "quantidade": 2
+    },
+    {
+      "id": 2,
+      "emcartaz_id": 1,
+      "tipoingresso_id": 2,
+      "quantidade": 1
+    }
+  ]
+}
