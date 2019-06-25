@@ -63,9 +63,9 @@ $(document).ready(function(){
             type: 'POST',
             url: serverURL,
             data: user,
-            success: function(){
+            success: function(adicionar){
                 $("#modalAdicionar").modal('hide');
-                addUsuario(user);
+                addUsuario(adicionar);
                 alert("Usuário adicionado com sucesso");  
                 document.querySelector("#inputAddNome").value = '';
                 document.querySelector("#inputAddSenha").value = '';
