@@ -23,17 +23,18 @@ $(document).ready(function(){
 
     $tcorpo.delegate(".apagar","click",function(){
         var $tr = $(this).closest("tr");
-        
-        $.ajax({
-            type: 'DELETE',
-            url: serverURL + "/" + $(this).attr("data-id"),
-            success: function(){
-                alert("Usuário removido com sucesso");
-                $tr.fadeOut(300, function(){
-                    $(this).remove();
-                });
-            }
-        });
+        if(confirm("Você realmente deseja deletar esse usuário?")){
+            $.ajax({
+                type: 'DELETE',
+                url: serverURL + "/" + $(this).attr("data-id"),
+                success: function(){
+                    alert("Usuário removido com sucesso");
+                    $tr.fadeOut(300, function(){
+                        $(this).remove();
+                    });
+                }
+            });
+        }
     });
 
     // WTF PQ NÂO ABRE O MODAL
@@ -54,22 +55,45 @@ $(document).ready(function(){
     });
     
     $modalAdicionar.delegate(".adicionar","click",function(){
-        var user = {
-            usuario: (document.querySelector("#inputAddNome")).value,
-            senha: (document.querySelector("#inputAddSenha")).value,
-        };
-
-        $.ajax({
-            type: 'POST',
-            url: serverURL,
-            data: user,
-            success: function(adicionar){
-                $("#modalAdicionar").modal('hide');
-                addUsuario(adicionar);
-                alert("Usuário adicionado com sucesso");  
-                document.querySelector("#inputAddNome").value = '';
-                document.querySelector("#inputAddSenha").value = '';
-            }
-        });
+        var addUser = document.querySelector("#inputAddNome");
+        var addSenha = document.querySelector("#inputAddSenha");
+        var erro = false;
+        if (addUser.value == '' || addUser.value == null) {
+            addUser.classList.add('border-danger');
+            erro = true;
+        } else {
+            addUser.classList.remove('border-danger');
+            addUser.classList.add('border-success');
+        }
+        if (addSenha.value == '' || addSenha.value == null) {
+            addSenha.classList.add('border-danger');
+            erro = true;
+        } else {
+            addSenha.classList.remove('border-danger');
+            addSenha.classList.add('border-success');
+        }
+        if(erro){
+            return;
+        }
+        else{
+            var user = {
+                usuario: addUser.value,
+                senha: addSenha.value,
+            };
+            addUser.classList.remove('border-success');
+            addSenha.classList.remove('border-success');
+            $.ajax({
+                type: 'POST',
+                url: serverURL,
+                data: user,
+                success: function(adicionar){
+                    $("#modalAdicionar").modal('hide');
+                    addUsuario(adicionar);
+                    alert("Usuário adicionado com sucesso");  
+                    addUser.value = '';
+                    addSenha.value = '';
+                }
+            });
+        }
     });
 });
