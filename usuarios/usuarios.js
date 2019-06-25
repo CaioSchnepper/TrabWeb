@@ -3,14 +3,15 @@ $(document).ready(function(){
     var $tcorpo = $("#tcorpo");
     var $modalAdicionar = $("#modalAdicionar");
     var $modalAlterar = $("#modalAlterar");
-
+    var $formAlterar = $("#formAlterar");
     function addUsuario(usuario){
         $tcorpo.append("<tr><th scope='row'>" + usuario.id +"</th><td>"+ usuario.usuario+"</td><td>"+ usuario.senha+
-        "<td><button type='button' class='btn btn-warning' data-id'"+usuario.id+
+        "<td><button type='button' class='alterar btn btn-warning' data-id='"+usuario.id+
         "' data-toggle='modal' data-target='#modalAlterar'>Alterar senha</button></td><td><button type='button' class='apagar btn btn-danger' data-id='"
         +usuario.id+"'>Apagar</button></td></tr>");
     }
     
+    // CARREGAR 
     $.ajax({
         type: 'GET',
         url: serverURL,
@@ -21,6 +22,7 @@ $(document).ready(function(){
         },
     });
 
+    // APAGAR
     $tcorpo.delegate(".apagar","click",function(){
         var $tr = $(this).closest("tr");
         if(confirm("Você realmente deseja deletar esse usuário?")){
@@ -37,23 +39,36 @@ $(document).ready(function(){
         }
     });
 
-    // WTF PQ NÂO ABRE O MODAL
-   $modalAlterar.delegate(".alterar","click",function(){
-        var user = {
-            /*usuario: $(this).closest("td"),*/
-            senha: (document.querySelector("#inputEditSenha")).value,
-        };
-
+    // EDITAR - WTF PQ NÂO ABRE O MODAL
+    $(".alterar").click(function(enviar){
+        enviar.preventDefault();
+        var editSenha = document.querySelector("#inputEditSenha");
+        
+        if (editSenha.value == '' || editSenha.value == null) {
+            editSenha.classList.add('border-danger');
+        } else {
+            editSenha.classList.remove('border-danger');
+            editSenha.value == '';
+            var user = {
+                usuario: $(this).attr("data-id"),
+                senha: editSenha.value,
+            };
+            console.log($(this).attr("data-id"));
+            // ^ ^ parei aq
+        }
+        /*
         $.ajax({
             url: serverURL + "/" + $(this).attr("data-id"),
             type: 'PUT',    
-            data: JSON.stringify(user),
-            success: function() {
+            data: user,
+            success: function(response) {
+                console.log(response);
                 alert("Senha alterada com sucesso");
             }
-        });
+        });*/
     });
     
+    // ADICIONAR
     $modalAdicionar.delegate(".adicionar","click",function(){
         var addUser = document.querySelector("#inputAddNome");
         var addSenha = document.querySelector("#inputAddSenha");
