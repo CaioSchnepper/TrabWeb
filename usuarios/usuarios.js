@@ -49,6 +49,7 @@ $(document).ready(function(){
             data: JSON.stringify(user),
             success: function() {
                 alert("Senha alterada com sucesso");
+                location.reload();
             }
         });
     });
