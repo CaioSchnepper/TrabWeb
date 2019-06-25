@@ -4,7 +4,7 @@ $(document).ready(function(){
     var $modalAdicionar = $("#modalAdicionar");
     var $modalAlterar = $("#modalAlterar");
 
-    function getUsuario(usuario){
+    function addUsuario(usuario){
         $tcorpo.append("<tr><th scope='row'>" + usuario.id +"</th><td>"+ usuario.usuario+"</td><td>"+ usuario.senha+
         "<td><button type='button' class='btn btn-warning' data-id'"+usuario.id+
         "'data-toggle='modal' data-target='#modalAlterar'>Alterar senha</button></td><td><button type='button' class='apagar btn btn-danger' data-id='"
@@ -16,7 +16,7 @@ $(document).ready(function(){
         url: serverURL,
         success: function(data){
             $.each(data, function(i,usuario){
-                getUsuario(usuario);
+                addUsuario(usuario);
             })
         },
     });
@@ -64,7 +64,11 @@ $(document).ready(function(){
             url: serverURL,
             data: user,
             success: function(){
-                alert("Usuário adicionado com sucesso");               
+                $("#modalAdicionar").modal('hide');
+                addUsuario(user);
+                alert("Usuário adicionado com sucesso");  
+                document.querySelector("#inputAddNome").value = '';
+                document.querySelector("#inputAddSenha").value = '';
             }
         });
     });
