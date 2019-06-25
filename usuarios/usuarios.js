@@ -7,7 +7,7 @@ $(document).ready(function(){
     function addUsuario(usuario){
         $tcorpo.append("<tr><th scope='row'>" + usuario.id +"</th><td>"+ usuario.usuario+"</td><td>"+ usuario.senha+
         "<td><button type='button' class='btn btn-warning' data-id'"+usuario.id+
-        "'data-toggle='modal' data-target='#modalAlterar'>Alterar senha</button></td><td><button type='button' class='apagar btn btn-danger' data-id='"
+        "' data-toggle='modal' data-target='#modalAlterar'>Alterar senha</button></td><td><button type='button' class='apagar btn btn-danger' data-id='"
         +usuario.id+"'>Apagar</button></td></tr>");
     }
     
@@ -41,7 +41,7 @@ $(document).ready(function(){
    $modalAlterar.delegate(".alterar","click",function(){
         var user = {
             /*usuario: $(this).closest("td"),*/
-            senha: editSenha = (document.querySelector("#inputEditSenha")).value,
+            senha: (document.querySelector("#inputEditSenha")).value,
         };
 
         $.ajax({
