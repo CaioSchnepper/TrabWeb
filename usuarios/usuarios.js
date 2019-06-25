@@ -40,7 +40,7 @@ $(document).ready(function(){
    $modalAlterar.delegate(".alterar","click",function(){
         var user = {
             /*usuario: $(this).closest("td"),*/
-            senha: editSenha = (document.querySelector("#inputEditSenha")).value,
+            senha: (document.querySelector("#inputEditSenha")).value,
         };
 
         $.ajax({
