@@ -1,8 +1,14 @@
 $(document).ready(function(){
     var serverURL = 'http://localhost:3000/usuarios';
     var $tcorpo = $("#tcorpo");
-    function addUsuario(usuario){
-        $tcorpo.append("<tr><th scope='row'>" + usuario.id +"</th><td>"+ usuario.usuario+"</td><td>"+ usuario.senha+"<td><button type='button' class='alterar btn btn-warning' data-id'"+usuario.id+"'data-toggle='modal' data-target='#modalAlterar'>Alterar senha</button></td><td><button type='button' class='apagar btn btn-danger' data-id='"+usuario.id+"'>Apagar</button></td></tr>");
+    var $modalAdicionar = $("#modalAdicionar");
+    var $modalAlterar = $("#modalAlterar");
+
+    function getUsuario(usuario){
+        $tcorpo.append("<tr><th scope='row'>" + usuario.id +"</th><td>"+ usuario.usuario+"</td><td>"+ usuario.senha+
+        "<td><button type='button' class='btn btn-warning' data-id'"+usuario.id+
+        "'data-toggle='modal' data-target='#modalAlterar'>Alterar senha</button></td><td><button type='button' class='apagar btn btn-danger' data-id='"
+        +usuario.id+"'>Apagar</button></td></tr>");
     }
     
     $.ajax({
@@ -10,7 +16,7 @@ $(document).ready(function(){
         url: serverURL,
         success: function(data){
             $.each(data, function(i,usuario){
-                addUsuario(usuario);
+                getUsuario(usuario);
             })
         },
     });
@@ -30,25 +36,36 @@ $(document).ready(function(){
         });
     });
 
-   $tcorpo.delegate(".editar","click",function(){
-        var editSenha = document.querySelector("#inputEditSenha");
-        var nomeUser = $(this).closest("tr");
-        console.log(nomeUser);
+    // WTF PQ NÂO ABRE O MODAL
+   $modalAlterar.delegate(".alterar","click",function(){
         var user = {
-            usuario: "a",
-            senha: editSenha.value,
+            /*usuario: $(this).closest("td"),*/
+            senha: editSenha = (document.querySelector("#inputEditSenha")).value,
         };
- /*       $.ajax({
+
+        $.ajax({
+            url: serverURL + "/" + $(this).attr("data-id"),
+            type: 'PUT',    
+            data: JSON.stringify(user),
+            success: function() {
+                alert("Senha alterada com sucesso");
+            }
+        });
+    });
+    
+    $modalAdicionar.delegate(".adicionar","click",function(){
+        var user = {
+            usuario: (document.querySelector("#inputAddNome")).value,
+            senha: (document.querySelector("#inputAddSenha")).value,
+        };
+
+        $.ajax({
             type: 'POST',
             url: serverURL,
             data: user,
-            success: function(novoUsuario){
-                alert("Usuário criado com sucesso!");
-                $("#modalCadastrar").modal('hide');
-            },
-            error: function(){
-                alert("Erro ao criar usuário");
+            success: function(){
+                alert("Usuário adicionado com sucesso");               
             }
-        });*/
+        });
     });
 });
