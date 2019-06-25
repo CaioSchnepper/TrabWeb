@@ -64,6 +64,7 @@ $(document).ready(function(){
             success: function(response) {
                 console.log(response);
                 alert("Senha alterada com sucesso");
+                location.reload();
             }
         });*/
     });
