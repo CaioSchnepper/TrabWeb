@@ -5,9 +5,9 @@ $(document).ready(function(){
     var $modalAlterar = $("#modalAlterar");
     var $formAlterar = $("#formAlterar");
     function addUsuario(usuario){
-        $tcorpo.append("<tr><th scope='row'>" + usuario.id +"</th><td>"+ usuario.usuario+"</td><td>"+ usuario.senha+
-        "<td><button type='button' class='alterar btn btn-warning' data-id='"+usuario.id+
-        "' data-toggle='modal' data-target='#modalAlterar'>Alterar senha</button></td><td><button type='button' class='apagar btn btn-danger' data-id='"
+        $tcorpo.append("<tr><th scope='row'>" + usuario.id +"</th><td class='user'>"+ usuario.usuario+"</td><td class='senha'>"+ usuario.senha+
+        "<td><button type='button' class='editarSenha btn btn-warning' data-id='"+usuario.id+
+        "'>Alterar senha</button></td><td><button type='button' class='apagar btn btn-danger' data-id='"
         +usuario.id+"'>Apagar</button></td></tr>");
     }
     
@@ -39,34 +39,35 @@ $(document).ready(function(){
         }
     });
 
-    // EDITAR - WTF PQ NÂO ABRE O MODAL
-    $(".alterar").click(function(enviar){
-        enviar.preventDefault();
-        var editSenha = document.querySelector("#inputEditSenha");
+    // EDITAR
+    $tcorpo.delegate(".editarSenha","click",function(){
+        var linha = this.parentNode.parentNode;
+        $modalAlterar.modal('show');
+        $formAlterar.on('submit', function(form){
+            form.preventDefault();
+            var editSenha = document.querySelector("#inputEditSenha");
         
-        if (editSenha.value == '' || editSenha.value == null) {
-            editSenha.classList.add('border-danger');
-        } else {
-            editSenha.classList.remove('border-danger');
-            editSenha.value == '';
-            var user = {
-                usuario: $(this).attr("data-id"),
-                senha: editSenha.value,
-            };
-            console.log($(this).attr("data-id"));
-            // ^ ^ parei aq
-        }
-        /*
-        $.ajax({
-            url: serverURL + "/" + $(this).attr("data-id"),
-            type: 'PUT',    
-            data: user,
-            success: function(response) {
-                console.log(response);
-                alert("Senha alterada com sucesso");
-                location.reload();
+            if (editSenha.value == '' || editSenha.value == null) {
+                editSenha.classList.add('border-danger');
+                return;
+            } else {
+                var user = {
+                    usuario: linha.querySelector('.user').textContent, 
+                    senha: editSenha.value,
+                };
+                editSenha.classList.remove('border-danger');
+                $.ajax({
+                    url: serverURL + "/" + linha.firstChild.textContent,
+                    type: 'PUT',    
+                    data: user,
+                    success: function() {
+                        alert("Senha alterada com sucesso");
+                        linha.querySelector('.senha').textContent = editSenha.value;
+                        $modalAlterar.modal('hide');
+                    }
+                });
             }
-        });*/
+        }); 
     });
     
     // ADICIONAR
