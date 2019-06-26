@@ -117,4 +117,11 @@ $(document).ready(function(){
             });
         }
     });
+
+    //SAIR
+    $('#sair').click(function(){
+        if(confirm("Você realmente deseja sair?")){
+            $(location).attr('href', '../login/login.html');
+        }
+    })
 });
