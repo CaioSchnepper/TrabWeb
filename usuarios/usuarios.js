@@ -62,7 +62,6 @@ $(document).ready(function(){
                     type: 'PUT',    
                     data: user,
                     success: function(response) {
-                        console.log(response);
                         alert("Senha alterada com sucesso");
                         linha.querySelector('.senha').textContent = editSenha.value;
                         editSenha.classList.remove('border-danger');

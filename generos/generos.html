@@ -23,25 +23,7 @@
 						<th scope="col"></th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>123</td>
-						<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalAlterar">Alterar gênero</button></td>
-						<td><button type="button" class="btn btn-danger">Apagar</button></td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>456</td>
-						<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalAlterar">Alterar gênero</button></td>
-						<td><button type="button" class="btn btn-danger">Apagar</button></td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>789</td>
-						<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalAlterar">Alterar gênero</button></td>
-						<td><button type="button" class="btn btn-danger">Apagar</button></td>
-					</tr>
+				<tbody id="tcorpo">
 				</tbody>
 			</table>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAdicionar">Adicionar novo gênero</button>
@@ -59,7 +41,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="container-fluid">
-						<form>
+						<form id="formAlterar">
 							<div class="form-group">
 							 	 <label for="inputEditGenero">Insira o novo gênero</label>
 							 	 <input type="text" class="form-control" id="inputEditGenero">
@@ -88,7 +70,7 @@
 							  	<label for="inputAddGenero">Insira o gênero</label>
 							  	<input type="text" class="form-control" id="inputAddGenero">
 							</div>
-							<button type="submit" class="btn btn-primary bg-dark border-dark">Enviar</button>
+							<button type="button" class="adicionar btn btn-primary bg-dark border-dark">Enviar</button>
 						</form>
 					</div>
 				</div>
@@ -100,5 +82,6 @@
 	
 	<script src="../js/jquery-3.4.1.js"></script>
 	<script src="../js/bootstrap.bundle.min.js"></script>
+	<script src="generos.js"></script>
 </body>
 </html>
