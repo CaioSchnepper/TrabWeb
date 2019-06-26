@@ -34,12 +34,44 @@
     {
       "genero": "Ação",
       "id": 2
+    },
+    {
+      "genero": "Terror",
+      "id": 3
+    },
+    {
+      "genero": "f",
+      "id": 4
+    },
+    {
+      "genero": "f",
+      "id": 5
+    },
+    {
+      "genero": "213123",
+      "id": 6
+    },
+    {
+      "genero": "123213321",
+      "id": 8
+    },
+    {
+      "genero": "32423432",
+      "id": 9
+    },
+    {
+      "genero": "f",
+      "id": 10
     }
   ],
   "salas": [
     {
       "id": 1,
       "lotacao_maxima": 30
+    },
+    {
+      "lotacao_maxima": "12",
+      "id": 2
     }
   ],
   "tipoingresso": [
@@ -57,6 +89,7 @@
   "filmes": [
     {
       "id": 1,
+	  "genero_id": 1,
       "titulo": "Vingadores: Ultimato",
       "ano_lancamento": 2019,
       "idioma": "pt-BR",
