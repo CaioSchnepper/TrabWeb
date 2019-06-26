@@ -43,8 +43,10 @@ $(document).ready(function(){
     $tcorpo.delegate(".editarSenha","click",function(){
         var linha = this.parentNode.parentNode;
         $modalAlterar.modal('show');
+        
         $formAlterar.on('submit', function(form){
             form.preventDefault();
+            form.stopImmediatePropagation();
             var editSenha = document.querySelector("#inputEditSenha");
         
             if (editSenha.value == '' || editSenha.value == null) {
@@ -55,14 +57,16 @@ $(document).ready(function(){
                     usuario: linha.querySelector('.user').textContent, 
                     senha: editSenha.value,
                 };
-                editSenha.classList.remove('border-danger');
                 $.ajax({
                     url: serverURL + "/" + linha.firstChild.textContent,
                     type: 'PUT',    
                     data: user,
-                    success: function() {
+                    success: function(response) {
+                        console.log(response);
                         alert("Senha alterada com sucesso");
                         linha.querySelector('.senha').textContent = editSenha.value;
+                        editSenha.classList.remove('border-danger');
+                        editSenha.value = '';
                         $modalAlterar.modal('hide');
                     }
                 });
