@@ -6,7 +6,9 @@ $(document).ready(function(){
     var $formAlterar = $("#formAlterar");
 
     function addCartaz(emcartaz){
-        $tcorpo.append("<tr><th scope='row'>" + emcartaz.id + "</th><td class='sala_id'>" + emcartaz.sala_id + "</td><td class='filme_id'>" + emcartaz.filme_id + "</td><td>" + "titulo" + "</td><td class='horario'>" + emcartaz.horario + "</td><td>Sim/Não</td><td><button type='button' class='editarIdFilme btn btn-warning' data-toggle='modal' data-target='#modalAlterar'>Alterar dados</button></td><td><button type='button' class='apagar btn btn-danger' data-id='" + emcartaz.id + "'>Apagar</button></td></tr>");
+        $tcorpo.append("<tr><th scope='row'>" + emcartaz.id + "</th><td class='sala_id'>" + emcartaz.sala_id + "</td><td class='filme_id'>"
+        + emcartaz.filme_id + "</td><td>" + "titulo" + "</td><td class='horario'>" + emcartaz.horario + 
+        "</td><td>Sim/Não</td><td><button type='button' class='editarIdFilme btn btn-warning'>Alterar dados</button></td><td><button type='button' class='apagar btn btn-danger' data-id='" + emcartaz.id + "'>Apagar</button></td></tr>");
     }
     
     // CARREGAR 
