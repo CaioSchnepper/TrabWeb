@@ -48,11 +48,11 @@
   ],
   "emcartaz": [
     {
-      "id": 1,
-      "sala_id": 1,
-      "filme_id": 1,
+      "sala_id": "1",
+      "filme_id": "1",
       "horario": "15 horas",
-      "ativo": true
+      "ativo": "Não",
+      "id": 1
     }
   ],
   "bilheterias": [

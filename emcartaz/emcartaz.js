@@ -5,10 +5,11 @@ $(document).ready(function(){
     var $modalAlterar = $("#modalAlterar");
     var $formAlterar = $("#formAlterar");
 
-    function addCartaz(emcartaz){
+    function addCartaz(emcartaz, nomeFilme){
         $tcorpo.append("<tr><th scope='row'>" + emcartaz.id + "</th><td class='sala_id'>" + emcartaz.sala_id + "</td><td class='filme_id'>"
-        + emcartaz.filme_id + "</td><td>" + "titulo" + "</td><td class='horario'>" + emcartaz.horario + 
-        "</td><td>Sim/Não</td><td><button type='button' class='editarIdFilme btn btn-warning'>Alterar dados</button></td><td><button type='button' class='apagar btn btn-danger' data-id='" + emcartaz.id + "'>Apagar</button></td></tr>");
+        + emcartaz.filme_id + "</td><td>" + nomeFilme + "</td><td class='horario'>" + emcartaz.horario + 
+        "</td><td>" + emcartaz.ativo + "</td><td><button type='button' class='editarIdFilme btn btn-warning' data-id='"+ emcartaz.id +
+        "'>Alterar dados</button></td><td><button type='button' class='apagar btn btn-danger' data-id='" + emcartaz.id + "'>Apagar</button></td></tr>");
     }
     
     // CARREGAR 
@@ -17,7 +18,14 @@ $(document).ready(function(){
         url: serverURL,
         success: function(data){
             $.each(data, function(i,emcartaz){
-                addCartaz(emcartaz);
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:3000/filmes/' + emcartaz.filme_id,
+                    success: function(dataFilme){
+                        var nomeFilme = dataFilme.titulo;
+                        addCartaz(emcartaz, nomeFilme);
+                    },
+                });
             })
         },
     });
@@ -110,6 +118,7 @@ $(document).ready(function(){
                 sala_id: addSala.value,
                 filme_id: addIdFilme.value,
                 horario: addHorario.value,
+                ativo: "Não",
             };
             addSala.classList.remove('border-success');
             addIdFilme.classList.remove('border-success');
