@@ -100,18 +100,39 @@
   ],
   "emcartaz": [
     {
-      "id": 1,
-      "sala_id": 1,
-      "filme_id": 1,
+      "filme_id": "1",
+      "sala_id": "1",
       "horario": "15 horas",
-      "ativo": true
+      "ativo": "Não",
+      "id": 1
     },
     {
-      "sala_id": "1",
       "filme_id": "1",
+      "sala_id": "1",
       "horario": "1",
       "ativo": "Não",
       "id": 2
+    },
+    {
+      "filme_id": "2",
+      "sala_id": "2",
+      "horario": "2",
+      "ativo": "Não",
+      "id": 3
+    },
+    {
+      "filme_id": "3",
+      "sala_id": "1",
+      "horario": "4",
+      "ativo": "Não",
+      "id": 4
+    },
+    {
+      "filme_id": "4",
+      "sala_id": "1",
+      "horario": "4",
+      "ativo": "Não",
+      "id": 5
     }
   ],
   "bilheterias": [
