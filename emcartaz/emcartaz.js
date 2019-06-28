@@ -4,10 +4,11 @@ $(document).ready(function(){
     var $modalAdicionar = $("#modalAdicionar");
     var $modalAlterar = $("#modalAlterar");
     var $formAlterar = $("#formAlterar");
+    var linhaID; // Tem que ser global se não buga tudo essa merda
 
     function addCartaz(emcartaz, nomeFilme){
         $tcorpo.append("<tr><th scope='row'>" + emcartaz.id + "</th><td class='sala_id'>" + emcartaz.sala_id + "</td><td class='filme_id'>"
-        + emcartaz.filme_id + "</td><td>" + nomeFilme + "</td><td class='horario'>" + emcartaz.horario + 
+        + emcartaz.filme_id + "</td><td class='nomeFilme'>" + nomeFilme + "</td><td class='horario'>" + emcartaz.horario + 
         "</td><td class='ativo'>" + emcartaz.ativo + "</td><td><button type='button' class='editarIdFilme btn btn-warning' data-id='"+ emcartaz.id +
         "'>Alterar dados</button></td><td><button type='button' class='apagar btn btn-danger' data-id='" + emcartaz.id + "'>Apagar</button></td></tr>");
     }
@@ -55,8 +56,7 @@ $(document).ready(function(){
     // EDITAR
     $tcorpo.delegate(".editarIdFilme","click",function(){
         var linha = this.parentNode.parentNode;
-        var linhaID = linha.firstChild.textContent;
-        console.log(linhaID); // Mostra linha correta
+        linhaID = linha.firstChild.textContent;
         $modalAlterar.modal('show');
         
         $formAlterar.on('submit', function(form){
@@ -74,17 +74,31 @@ $(document).ready(function(){
                     horario: linha.querySelector('.horario').textContent,
                     ativo: linha.querySelector('.ativo').textContent,
                 };
-                console.log(linhaID); // A variavel muda sozinha de valor????
                 $.ajax({
                     url: serverURL + "/" + linhaID,
                     type: 'PUT',    
                     data: filme,
                     success: function(response) {
-                        alert("Filme alterado com sucesso");
-                        linha.querySelector('.filme_id').textContent = editIdFilme.value;
-                        editIdFilme.classList.remove('border-danger');
-                        editIdFilme.value = '';
-                        $modalAlterar.modal('hide');
+                        $.ajax({
+                            type: 'GET',
+                            url: 'http://localhost:3000/filmes/' + editIdFilme.value,
+                            success: function(dataFilme){
+                                alert("Filme alterado com sucesso");
+                                linha.querySelector('.filme_id').textContent = editIdFilme.value;
+                                linha.querySelector('.nomeFilme').textContent = dataFilme.titulo;
+                                editIdFilme.classList.remove('border-danger');
+                                editIdFilme.value = '';
+                                $modalAlterar.modal('hide');
+                            },
+                            error: function() {
+                                //alert("Erro ao carregar o filme com ID: " + emcartaz.filme_id);
+                                linha.querySelector('.filme_id').textContent = editIdFilme.value;
+                                linha.querySelector('.nomeFilme').textContent = "Não existente";
+                                editIdFilme.classList.remove('border-danger');
+                                editIdFilme.value = '';
+                                $modalAlterar.modal('hide');
+                            },
+                        });
                     }
                 });
             }
