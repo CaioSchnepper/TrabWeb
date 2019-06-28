@@ -9,10 +9,18 @@ $(document).ready(function(){
     function addCartaz(emcartaz, nomeFilme){
         $tcorpo.append("<tr><th scope='row'>" + emcartaz.id + "</th><td class='sala_id'>" + emcartaz.sala_id + "</td><td class='filme_id'>"
         + emcartaz.filme_id + "</td><td class='nomeFilme'>" + nomeFilme + "</td><td class='horario'>" + emcartaz.horario + 
-        "</td><td class='ativo'>" + emcartaz.ativo + "</td><td><button type='button' class='editarIdFilme btn btn-warning' data-id='"+ emcartaz.id +
+        "</td><td><button type='button' class='botaoAtivar btn " + ativar(emcartaz.ativo) + "'>" + emcartaz.ativo + "</button></td><td><button type='button' class='editarIdFilme btn btn-warning' data-id='"+ emcartaz.id +
         "'>Alterar dados</button></td><td><button type='button' class='apagar btn btn-danger' data-id='" + emcartaz.id + "'>Apagar</button></td></tr>");
     }
     
+    function ativar(valor) {
+        if (valor == "Não"){
+            return ('btn-danger');
+        } else if (valor == "Sim" || valor == true){
+           return ('btn-success');
+        }
+    }
+
     // CARREGAR 
     $.ajax({
         type: 'GET',
@@ -53,6 +61,41 @@ $(document).ready(function(){
         }
     });
 
+    // ATIVAR
+    $tcorpo.delegate(".botaoAtivar","click",function(){
+        var linha = this.parentNode.parentNode;
+        linhaID = linha.firstChild.textContent;
+        if (linha.querySelector('.botaoAtivar').textContent == "Não"){
+            var troca = "Sim";
+        } else if (linha.querySelector('.botaoAtivar').textContent == "Sim" || linha.querySelector('.botaoAtivar').textContent == true){
+            var troca = "Não";
+        }
+        var filme = {
+            filme_id: linha.querySelector('.filme_id').textContent,
+            sala_id: linha.querySelector('.sala_id').textContent,
+            horario: linha.querySelector('.horario').textContent,
+            ativo: troca,
+        };
+        $.ajax({
+            url: serverURL + "/" + linhaID,
+            type: 'PUT',    
+            data: filme,
+            success: function(response) {
+                linha.querySelector('.botaoAtivar').textContent = troca;
+                if (linha.querySelector('.botaoAtivar').classList.contains("btn-danger")) {
+                    linha.querySelector('.botaoAtivar').classList.remove("btn-danger");
+                    linha.querySelector('.botaoAtivar').classList.add("btn-success");
+                } else if (linha.querySelector('.botaoAtivar').classList.contains("btn-success")) {
+                    linha.querySelector('.botaoAtivar').classList.remove("btn-success");
+                    linha.querySelector('.botaoAtivar').classList.add("btn-danger");
+                }
+            },
+            error: function() {
+                //alert("Erro ao ativar o filme);
+            },
+        });
+    });
+
     // EDITAR
     $tcorpo.delegate(".editarIdFilme","click",function(){
         var linha = this.parentNode.parentNode;
@@ -72,7 +115,7 @@ $(document).ready(function(){
                     filme_id: editIdFilme.value,
                     sala_id: linha.querySelector('.sala_id').textContent,
                     horario: linha.querySelector('.horario').textContent,
-                    ativo: linha.querySelector('.ativo').textContent,
+                    ativo: linha.querySelector('.botaoAtivar').textContent,
                 };
                 $.ajax({
                     url: serverURL + "/" + linhaID,
