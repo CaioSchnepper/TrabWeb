@@ -194,12 +194,29 @@ $(document).ready(function(){
                 url: serverURL,
                 data: filme,
                 success: function(adicionar){
-                    $("#modalAdicionar").modal('hide');
-                    addCartaz(adicionar);
-                    alert("Filme adicionado com sucesso");  
-                    addSala.value = '';
-                    addIdFilme.value = '';
-                    addHorario.value = '';
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost:3000/filmes/' + adicionar.filme_id,
+                        success: function(dataFilme){
+                            var nomeFilme = dataFilme.titulo;
+                            addCartaz(adicionar, nomeFilme);
+                            $("#modalAdicionar").modal('hide');
+                            alert("Filme adicionado com sucesso");  
+                            addSala.value = '';
+                            addIdFilme.value = '';
+                            addHorario.value = '';
+                        },
+                        error: function() {
+                            //alert("Erro ao carregar o filme com ID: " + emcartaz.filme_id);
+                            var nomeFilme = "Não existente";
+                            addCartaz(adicionar, nomeFilme);
+                            $("#modalAdicionar").modal('hide');
+                            alert("Filme adicionado com sucesso");  
+                            addSala.value = '';
+                            addIdFilme.value = '';
+                            addHorario.value = '';
+                        },
+                    });
                 }
             });
         }
