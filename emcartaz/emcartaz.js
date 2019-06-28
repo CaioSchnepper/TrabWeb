@@ -5,6 +5,7 @@ $(document).ready(function(){
     var $modalAlterar = $("#modalAlterar");
     var $formAlterar = $("#formAlterar");
     var linhaID; // Tem que ser global se não buga tudo essa merda
+    var linha; // Tbm tem que ser global esse lixo
 
     function addCartaz(emcartaz, nomeFilme){
         $tcorpo.append("<tr><th scope='row'>" + emcartaz.id + "</th><td class='sala_id'>" + emcartaz.sala_id + "</td><td class='filme_id'>"
@@ -98,7 +99,7 @@ $(document).ready(function(){
 
     // EDITAR
     $tcorpo.delegate(".editarIdFilme","click",function(){
-        var linha = this.parentNode.parentNode;
+        linha = this.parentNode.parentNode;
         linhaID = linha.firstChild.textContent;
         $modalAlterar.modal('show');
         
@@ -126,14 +127,14 @@ $(document).ready(function(){
                             type: 'GET',
                             url: 'http://localhost:3000/filmes/' + editIdFilme.value,
                             success: function(dataFilme){
-                                alert("Filme alterado com sucesso");
                                 linha.querySelector('.filme_id').textContent = editIdFilme.value;
                                 linha.querySelector('.nomeFilme').textContent = dataFilme.titulo;
                                 editIdFilme.classList.remove('border-danger');
                                 editIdFilme.value = '';
                                 $modalAlterar.modal('hide');
+                                alert("Filme alterado com sucesso");
                             },
-                            error: function() {
+                            error: function(){
                                 //alert("Erro ao carregar o filme com ID: " + emcartaz.filme_id);
                                 linha.querySelector('.filme_id').textContent = editIdFilme.value;
                                 linha.querySelector('.nomeFilme').textContent = "Não existente";
