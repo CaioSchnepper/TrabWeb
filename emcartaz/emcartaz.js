@@ -25,6 +25,11 @@ $(document).ready(function(){
                         var nomeFilme = dataFilme.titulo;
                         addCartaz(emcartaz, nomeFilme);
                     },
+                    error: function() {
+                        alert("Erro ao carregar o filme com ID: " + emcartaz.filme_id);
+                        var nomeFilme = "Não existente";
+                        addCartaz(emcartaz, nomeFilme);
+                    },
                 });
             })
         },
