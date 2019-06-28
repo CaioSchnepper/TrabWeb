@@ -4,6 +4,26 @@
       "usuario": "admin",
       "senha": "admin",
       "id": 1
+    },
+    {
+      "usuario": "eric",
+      "senha": "8",
+      "id": 2
+    },
+    {
+      "usuario": "321321",
+      "senha": "5",
+      "id": 3
+    },
+    {
+      "usuario": "2",
+      "senha": "2",
+      "id": 4
+    },
+    {
+      "usuario": "2",
+      "senha": "5",
+      "id": 5
     }
   ],
   "generos": [
@@ -14,12 +34,32 @@
     {
       "genero": "Ação",
       "id": 2
+    },
+    {
+      "genero": "Terror",
+      "id": 3
+    },
+    {
+      "genero": "Porno",
+      "id": 4
+    },
+    {
+      "genero": "Suspense",
+      "id": 5
+    },
+    {
+      "genero": "Aventura",
+      "id": 6
     }
   ],
   "salas": [
     {
       "id": 1,
       "lotacao_maxima": 30
+    },
+    {
+      "lotacao_maxima": "12",
+      "id": 2
     }
   ],
   "tipoingresso": [
@@ -36,23 +76,42 @@
   ],
   "filmes": [
     {
-      "id": 1,
-      "titulo": "Vingadores: Ultimato",
-      "ano_lancamento": 2019,
-      "idioma": "pt-BR",
-      "duracao": "3h 2m",
-      "sinopse": "Após Thanos eliminar metade das criaturas vivas, os Vingadores têm de lidar com a perda de amigos e entes queridos. Com Tony Stark vagando perdido no espaço sem água e comida, Steve Rogers e Natasha Romanov lideram a resistência contra o titã louco.",
-      "poster_link": "http://t0.gstatic.com/images?q=tbn:ANd9GcQMwtU95JygcmCq4e3XPpL9W0ATjGFoQCQm16dbpIp7BM36B7lH",
-      "trailer_link": "https://youtu.be/-4VRbM-UHew"
+      "genero_id": "4",
+      "titulo": "O Jardineiro Tarado",
+      "ano_lancamento": "2019",
+      "idioma": "PT-BR",
+      "duracao": "1h12",
+      "sinopse": "O jardineiro Tarado, filme pornô da Brasileirinhas, as gostosas foderam muito com os jardineiros bem dotados e ficaram arregaçadas, o filme tem quatro cenas com muita foda e sexo explícito, várias gostosas fodendo e dando até o cuzinho para o jardineiro, são quatro histórias diferentes com atrizes pra lá de gostosas, além de um ménage e uma cena lésbica.",
+      "poster_link": "https://static1.brasileirinhas.com.br/Brasileirinhas/images/conteudo/filmes/original/Capa-do-filme-o-jardineiro-tarado-Frente-1126.jpg",
+      "trailer_link": "https://www.brasileirinhas.com.br/filme/o-jardineiro-tarado.html#trailer",
+      "id": 2
+    },
+    {
+      "genero_id": "3",
+      "titulo": "VAI SE FUDE N AGUENTO MAIS ESSA MERDA",
+      "ano_lancamento": "2019",
+      "idioma": "pUtONES",
+      "duracao": "1 MILHÃO DE ANOS NESSA CARALHA",
+      "sinopse": "ATÉ QUE ENFIM CARALHO, VO DORMIR PORRA",
+      "poster_link": "https://data.whicdn.com/images/309804438/large.jpg",
+      "trailer_link": "https://tiny.cc/o7hy8y",
+      "id": 3
     }
   ],
   "emcartaz": [
     {
+      "id": 1,
+      "sala_id": 1,
+      "filme_id": 1,
+      "horario": "15 horas",
+      "ativo": true
+    },
+    {
       "sala_id": "1",
       "filme_id": "1",
-      "horario": "15 horas",
+      "horario": "1",
       "ativo": "Não",
-      "id": 1
+      "id": 2
     }
   ],
   "bilheterias": [
