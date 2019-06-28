@@ -8,7 +8,7 @@ $(document).ready(function(){
     function addCartaz(emcartaz, nomeFilme){
         $tcorpo.append("<tr><th scope='row'>" + emcartaz.id + "</th><td class='sala_id'>" + emcartaz.sala_id + "</td><td class='filme_id'>"
         + emcartaz.filme_id + "</td><td>" + nomeFilme + "</td><td class='horario'>" + emcartaz.horario + 
-        "</td><td>" + emcartaz.ativo + "</td><td><button type='button' class='editarIdFilme btn btn-warning' data-id='"+ emcartaz.id +
+        "</td><td class='ativo'>" + emcartaz.ativo + "</td><td><button type='button' class='editarIdFilme btn btn-warning' data-id='"+ emcartaz.id +
         "'>Alterar dados</button></td><td><button type='button' class='apagar btn btn-danger' data-id='" + emcartaz.id + "'>Apagar</button></td></tr>");
     }
     
@@ -26,7 +26,7 @@ $(document).ready(function(){
                         addCartaz(emcartaz, nomeFilme);
                     },
                     error: function() {
-                        alert("Erro ao carregar o filme com ID: " + emcartaz.filme_id);
+                        //alert("Erro ao carregar o filme com ID: " + emcartaz.filme_id);
                         var nomeFilme = "Não existente";
                         addCartaz(emcartaz, nomeFilme);
                     },
@@ -55,6 +55,8 @@ $(document).ready(function(){
     // EDITAR
     $tcorpo.delegate(".editarIdFilme","click",function(){
         var linha = this.parentNode.parentNode;
+        var linhaID = linha.firstChild.textContent;
+        console.log(linhaID); // Mostra linha correta
         $modalAlterar.modal('show');
         
         $formAlterar.on('submit', function(form){
@@ -70,9 +72,11 @@ $(document).ready(function(){
                     filme_id: editIdFilme.value,
                     sala_id: linha.querySelector('.sala_id').textContent,
                     horario: linha.querySelector('.horario').textContent,
+                    ativo: linha.querySelector('.ativo').textContent,
                 };
+                console.log(linhaID); // A variavel muda sozinha de valor????
                 $.ajax({
-                    url: serverURL + "/" + linha.firstChild.textContent,
+                    url: serverURL + "/" + linhaID,
                     type: 'PUT',    
                     data: filme,
                     success: function(response) {
