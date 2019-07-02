@@ -7,34 +7,34 @@
     <title>Sistema Cinema</title>
 </head>
 <body class="h-100 bg-dark">
-	<h1 class="bg-light text-center p-4">
-		Sistema
-		<button id="sair" type="button" class="btn btn-danger float-right">Sair</button>
-	</h1>
-	<div class="container-fluid h-75 d-flex text-center align-items-center overflow-auto">
+	<div id="logo" class="bg-light d-flex justify-content-center align-items-center" style="height: 15%;">
+		<h1 class="position-absolute">Sistema</h1>
+		<button id="sair" type="button" class="btn btn-danger ml-auto mr-4">Sair</button>
+	</div>
+	<div id="container" class="container-fluid d-flex justify-content-center align-items-center overflow-auto">
 		<div class="container text-light">
-			<div class="row d-flex">
-				<a href="usuarios/usuarios.html" class="col my-3"><button type="button" class="col btn btn-secondary py-5">
+			<div class="row">
+				<a href="usuarios/usuarios.html" class="col my-3"><button type="button" class="col btn btn-secondary p-5">
 					Usuários
 				</button></a>
-				<a href="generos/generos.html" class="col my-3"><button type="button" class="col btn btn-secondary py-5">
+				<a href="generos/generos.html" class="col my-3"><button type="button" class="col btn btn-secondary p-5">
 					Gêneros
 				</button></a>
-				<a href="salas/salas.html" class="col my-3"><button type="button" class="col btn btn-secondary py-5">
+				<a href="salas/salas.html" class="col my-3"><button type="button" class="col btn btn-secondary p-5">
 					Salas
 				</button></a>
-				<a href="ingressos/ingressos.html" class="col my-3"><button type="button" class="col btn btn-secondary py-5">
+				<a href="ingressos/ingressos.html" class="col my-3"><button type="button" class="col btn btn-secondary p-5">
 					Ingressos
 				</button></a>
 			</div>
-			<div class="row d-flex justify-content-center">
-				<a href="filmes/filmes.html" class="col my-3"><button type="button" class="col btn btn-secondary py-5">
+			<div class="row">
+				<a href="filmes/filmes.html" class="col my-3"><button type="button" class="col btn btn-secondary p-5">
 					Filmes
 				</button></a>
-				<a href="emcartaz/emcartaz.html" class="col my-3"><button type="button" class="col btn btn-secondary py-5">
+				<a href="emcartaz/emcartaz.html" class="col my-3"><button type="button" class="col btn btn-secondary p-5">
 					Filmes em cartaz
 				</button></a>
-				<a href="bilheteria/bilheteria.html" class="col my-3"><button type="button" class="col btn btn-secondary py-5">
+				<a href="bilheteria/bilheteria.html" class="col my-3"><button type="button" class="col btn btn-secondary p-5">
 					Bilheteria
 				</button></a>
 				<a href="relatorios/relatorios.html" class="col my-3"><button type="button" class="col btn btn-secondary py-5">
@@ -44,9 +44,10 @@
 		</div>
 	</div>
 	
-	<footer class="bg-light text-center p-1 mt-2">Desenvolvido pelos mano da quebrada</footer>
+	<footer id="footer" class="bg-light d-flex align-items-center justify-content-center" style="height: 5%;">Desenvolvido pelos mano da quebrada</footer>
 	
 	<script src="js/jquery-3.4.1.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="index.js"></script>
 </body>
 </html>
