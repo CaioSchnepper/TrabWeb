@@ -4,8 +4,8 @@ $(document).ready(function(){
     var $modalVender = $("#modalVender");
 
     function addVenda(venda, emcartaz, filmes, tipoingresso){
-        $tcorpo.append("<tr><th scope='row'>" + venda.id + "</th><td>" + emcartaz.emcartaz_id + "</td><td>" + filmes.titulo + "</td><td>" + tipoingresso.id +
-        "</td><td>" + tipoingresso.descricao + "</td><td>" + venda.quantidade + "</td><td><button type='button' class='apagar btn btn-danger'>Apagar</button></td></tr>");
+        $tcorpo.append("<tr><th scope='row'>" + venda.id + "</th><td>" + emcartaz.id + "</td><td>" + filmes.titulo + "</td><td>" + tipoingresso.id +
+        "</td><td>" + tipoingresso.descricao + "</td><td>" + venda.quantidade + "</td><td><button type='button' class='apagar btn btn-danger' data-id='"+ venda.id + "'>Apagar</button></td></tr>");
     }
     
     // CARREGAR 
@@ -13,124 +13,119 @@ $(document).ready(function(){
         type: 'GET',
         url: serverURL,
         success: function(data){
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost:3000/emcartaz',
-                success: function(dataEmCartaz){
-                    $.ajax({
-                        type: 'GET',
-                        url: 'http://localhost:3000/filmes',
-                        success: function(dataFilmes){
-                            $.ajax({
-                                type: 'GET',
-                                url: 'http://localhost:3000/tipoingresso',
-                                success: function(datatipoIngresso){
-                                    $.each(data, function(i,venda){
-                                        addVenda(venda, dataEmCartaz, dataFilmes, datatipoIngresso);
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }         
+            $.each(data, function(i,venda){
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:3000/emcartaz/' + venda.emcartaz_id,
+                    success: function(dataEmCartaz){
+                        $.ajax({
+                            type: 'GET',
+                            url: 'http://localhost:3000/filmes/' + dataEmCartaz.filme_id,
+                            success: function(dataFilmes){
+                                $.ajax({
+                                    type: 'GET',
+                                    url: 'http://localhost:3000/tipoingresso/' + venda.tipoingresso_id,
+                                    success: function(dataTipoIngresso){
+                                        addVenda(venda, dataEmCartaz, dataFilmes, dataTipoIngresso);                  
+                                    }
+                                });
+                            }
+                        });
+                    }         
+                });
             });
         },
     });
 
     // APAGAR
-    /*$tcorpo.delegate(".apagar","click",function(){
+    $tcorpo.delegate(".apagar","click",function(){
         var $tr = $(this).closest("tr");
-        if(confirm("Você realmente deseja deletar esse tipo de ingresso?")){
+        if(confirm("Você realmente deseja apagar essa venda?")){
             $.ajax({
                 type: 'DELETE',
                 url: serverURL + "/" + $(this).attr("data-id"),
                 success: function(){
-                    alert("Tipo de ingresso removido com sucesso");
+                    alert("Venda removida com sucesso");
                     $tr.fadeOut(300, function(){
                         $(this).remove();
                     });
                 }
             });
         }
-    });*/
-
-    // EDITAR
-    /*$tcorpo.delegate(".editarTipo","click",function(){
-        var linha = this.parentNode.parentNode;
-        $modalAlterar.modal('show');
-        
-        $formAlterar.on('submit', function(form){
-            form.preventDefault();
-            form.stopImmediatePropagation();
-            var editTipo = document.querySelector("#inputEditTipo");
-        
-            if (editTipo.value == '' || editTipo.value == null) {
-                editTipo.classList.add('border-danger');
-                return;
-            } else {
-                var ticket = {
-                    descricao: editTipo.value,
-                    valor: linha.querySelector('.valor').textContent, 
-                };
-                $.ajax({
-                    url: serverURL + "/" + linha.firstChild.textContent,
-                    type: 'PUT',    
-                    data: ticket,
-                    success: function(response) {
-                        alert("Tipo de ingresso alterado com sucesso");
-                        linha.querySelector('.ticket').textContent = editTipo.value;
-                        editTipo.classList.remove('border-danger');
-                        editTipo.value = '';
-                        $modalAlterar.modal('hide');
-                    }
-                });
-            }
-        }); 
-    });*/
+    });
    
-    // ADICIONAR
-    /*$modalAdicionar.delegate(".adicionar","click",function(){
-        var addTipo = document.querySelector("#inputAddTipo");
-        var addValor = document.querySelector("#inputAddValor");
+    // VENDER
+    $modalVender.delegate(".vender","click",function(){
+        var addIdEmCartaz = document.querySelector("#inputAddIdEmCartaz");
+        var addIdTipoIngresso = document.querySelector("#inputAddIdTipoIngresso");
+        var addQuantidade = document.querySelector("#inputAddQuantidade");
         var erro = false;
-        if (addTipo.value == '' || addTipo.value == null) {
-            addTipo.classList.add('border-danger');
+        if (addIdEmCartaz.value == '' || addIdEmCartaz.value == null) {
+            addIdEmCartaz.classList.add('border-danger');
             erro = true;
         } else {
-            addTipo.classList.remove('border-danger');
-            addTipo.classList.add('border-success');
+            addIdEmCartaz.classList.remove('border-danger');
+            addIdEmCartaz.classList.add('border-success');
         }
-        if (addValor.value == '' || addValor.value == null) {
-            addValor.classList.add('border-danger');
+        if (addIdTipoIngresso.value == '' || addIdTipoIngresso.value == null) {
+            addIdTipoIngresso.classList.add('border-danger');
             erro = true;
         } else {
-            addValor.classList.remove('border-danger');
-            addValor.classList.add('border-success');
+            addIdTipoIngresso.classList.remove('border-danger');
+            addIdTipoIngresso.classList.add('border-success');
+        }
+        if (addQuantidade.value == '' || addQuantidade.value == null) {
+            addQuantidade.classList.add('border-danger');
+            erro = true;
+        } else {
+            addQuantidade.classList.remove('border-danger');
+            addQuantidade.classList.add('border-success');
         }
         if(erro){
             return;
         }
         else{
-            var ticket = {
-                descricao: addTipo.value,
-                valor: addValor.value,
+            var venda = {
+                emcartaz_id: addIdEmCartaz.value,
+                tipoingresso_id: addIdTipoIngresso.value,
+                quantidade: addQuantidade.value
             };
-            addTipo.classList.remove('border-success');
-            addValor.classList.remove('border-success');
+            addIdEmCartaz.classList.remove('border-success');
+            addIdTipoIngresso.classList.remove('border-success');
+            addQuantidade.classList.remove('border-success');
             $.ajax({
                 type: 'POST',
                 url: serverURL,
-                data: ticket,
-                success: function(adicionar){
-                    $("#modalAdicionar").modal('hide');
-                    addIngresso(adicionar);
-                    alert("Ingresso adicionado com sucesso");  
-                    addTipo.value = '';
-                    addValor.value = '';
+                data: venda,
+                success: function(venda){
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost:3000/emcartaz/' + venda.emcartaz_id,
+                        success: function(dataEmCartaz){
+                            $.ajax({
+                                type: 'GET',
+                                url: 'http://localhost:3000/filmes/' + dataEmCartaz.filme_id,
+                                success: function(dataFilmes){
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: 'http://localhost:3000/tipoingresso/' + venda.tipoingresso_id,
+                                        success: function(dataTipoIngresso){
+                                            addVenda(venda, dataEmCartaz, dataFilmes, dataTipoIngresso); 
+                                            $("#modalAdicionar").modal('hide');
+                                            alert("Venda adicionada com sucesso");  
+                                            addIdEmCartaz.value = '';
+                                            addIdTipoIngresso.value = '';
+                                            addQuantidade.value = '';
+                                        }
+                                    });
+                                }
+                            });
+                        }         
+                    });
                 }
             });
         }
-    });*/
+    });
 
     //SAIR
     $('#sair').click(function(){
