@@ -93,34 +93,63 @@ $(document).ready(function(){
             addIdEmCartaz.classList.remove('border-success');
             addIdTipoIngresso.classList.remove('border-success');
             addQuantidade.classList.remove('border-success');
-            $.ajax({
-                type: 'POST',
-                url: serverURL,
-                data: venda,
-                success: function(venda){
+ 
+            $.ajax({ // Checagem de assentos
+                type: 'GET',
+                url: 'http://localhost:3000/emcartaz/' + venda.emcartaz_id,
+                success: function(dataEmCartaz){
                     $.ajax({
                         type: 'GET',
-                        url: 'http://localhost:3000/emcartaz/' + venda.emcartaz_id,
-                        success: function(dataEmCartaz){
-                            $.ajax({
-                                type: 'GET',
-                                url: 'http://localhost:3000/filmes/' + dataEmCartaz.filme_id,
-                                success: function(dataFilmes){
-                                    $.ajax({
-                                        type: 'GET',
-                                        url: 'http://localhost:3000/tipoingresso/' + venda.tipoingresso_id,
-                                        success: function(dataTipoIngresso){
-                                            addVenda(venda, dataEmCartaz, dataFilmes, dataTipoIngresso); 
-                                            $("#modalVender").modal('hide');
-                                            alert("Venda adicionada com sucesso");  
-                                            addIdEmCartaz.value = '';
-                                            addIdTipoIngresso.value = '';
-                                            addQuantidade.value = '';
-                                        }
-                                    });
-                                }
-                            });
-                        }         
+                        url: 'http://localhost:3000/salas/' + dataEmCartaz.sala_id,
+                        success: function(dataSalas){
+                            if (dataSalas.restante - venda.quantidade >= 0) {
+                                var lot = {
+                                    lotacao_maxima: dataSalas.lotacao_maxima,
+                                    restante: dataSalas.restante - venda.quantidade,
+                                };
+                                $.ajax({
+                                    url: 'http://localhost:3000/salas/' + dataEmCartaz.sala_id,
+                                    type: 'PUT',    
+                                    data: lot,
+                                    success: function() {
+                                        $.ajax({ // Venda efetiva
+                                            type: 'POST',
+                                            url: serverURL,
+                                            data: venda,
+                                            success: function(venda){
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    url: 'http://localhost:3000/emcartaz/' + venda.emcartaz_id,
+                                                    success: function(dataEmCartaz){
+                                                        $.ajax({
+                                                            type: 'GET',
+                                                            url: 'http://localhost:3000/filmes/' + dataEmCartaz.filme_id,
+                                                            success: function(dataFilmes){
+                                                                $.ajax({
+                                                                    type: 'GET',
+                                                                    url: 'http://localhost:3000/tipoingresso/' + venda.tipoingresso_id,
+                                                                    success: function(dataTipoIngresso){
+                                                                        addVenda(venda, dataEmCartaz, dataFilmes, dataTipoIngresso); 
+                                                                        $("#modalVender").modal('hide');
+                                                                        alert("Venda adicionada com sucesso");  
+                                                                        addIdEmCartaz.value = '';
+                                                                        addIdTipoIngresso.value = '';
+                                                                        addQuantidade.value = '';
+                                                                    }
+                                                                });
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }         
+                                        });    
+                                    }
+                                });
+                            } else {
+                                alert("Ingressos esgotados para essa sala");
+                                alert("A quantidade disponível de ingressos é: " + dataSalas.restante);
+                            }
+                        }
                     });
                 }
             });
