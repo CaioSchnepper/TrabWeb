@@ -111,7 +111,7 @@ $(document).ready(function(){
                                         url: 'http://localhost:3000/tipoingresso/' + venda.tipoingresso_id,
                                         success: function(dataTipoIngresso){
                                             addVenda(venda, dataEmCartaz, dataFilmes, dataTipoIngresso); 
-                                            $("#modalAdicionar").modal('hide');
+                                            $("#modalVender").modal('hide');
                                             alert("Venda adicionada com sucesso");  
                                             addIdEmCartaz.value = '';
                                             addIdTipoIngresso.value = '';
