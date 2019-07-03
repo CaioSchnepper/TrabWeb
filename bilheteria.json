@@ -14,31 +14,6 @@
       "usuario": "caio",
       "senha": "123456",
       "id": 3
-    },
-    {
-      "usuario": "cleiton",
-      "senha": "55555",
-      "id": 4
-    },
-    {
-      "usuario": "1",
-      "senha": "1",
-      "id": 5
-    },
-    {
-      "usuario": "1",
-      "senha": "1",
-      "id": 6
-    },
-    {
-      "usuario": "1",
-      "senha": "1",
-      "id": 7
-    },
-    {
-      "usuario": "1",
-      "senha": "1",
-      "id": 8
     }
   ],
   "generos": [
@@ -55,18 +30,14 @@
       "id": 3
     },
     {
-      "genero": "Porno",
-      "id": 4
-    },
-    {
       "genero": "Suspense",
-      "id": 5
+      "id": 4
     }
   ],
   "salas": [
     {
       "id": 1,
-      "lotacao_maxima": 30
+      "lotacao_maxima": "30"
     },
     {
       "lotacao_maxima": "12",
@@ -74,7 +45,6 @@
     },
     {
       "lotacao_maxima": "10",
-      "restante": "0",
       "id": 3
     }
   ],
@@ -82,111 +52,106 @@
     {
       "id": 1,
       "descricao": "Inteira",
-      "valor": 20
+      "valor": "20"
     },
     {
       "id": 2,
       "descricao": "Meia",
-      "valor": 10
+      "valor": "10"
     },
     {
-      "descricao": "Insento",
+      "descricao": "Isento",
       "valor": "0",
       "id": 3
     }
   ],
   "filmes": [
     {
-      "genero_id": "4",
-      "titulo": "O Jardineiro Tarado",
-      "ano_lancamento": "2019",
+      "genero_id": "2",
+      "titulo": "Vingadores: Guerra Infinita",
+      "ano_lancamento": "2018",
       "idioma": "PT-BR",
-      "duracao": "1h12",
-      "sinopse": "O jardineiro Tarado, filme pornô da Brasileirinhas, as gostosas foderam muito com os jardineiros bem dotados e ficaram arregaçadas, o filme tem quatro cenas com muita foda e sexo explícito, várias gostosas fodendo e dando até o cuzinho para o jardineiro, são quatro histórias diferentes com atrizes pra lá de gostosas, além de um ménage e uma cena lésbica.",
-      "poster_link": "https://static1.brasileirinhas.com.br/Brasileirinhas/images/conteudo/filmes/original/Capa-do-filme-o-jardineiro-tarado-Frente-1126.jpg",
-      "trailer_link": "https://www.brasileirinhas.com.br/filme/o-jardineiro-tarado.html#trailer",
-      "id": 2
+      "duracao": "2h 36min",
+      "sinopse": "Thanos (Josh Brolin) enfim chega à Terra, disposto a reunir as Joias do Infinito. Para enfrentá-lo, os Vingadores precisam unir forças com os Guardiões da Galáxia, ao mesmo tempo em que lidam com desavenças entre alguns de seus integrantes.",
+      "poster_link": "https://www.burnbook.com.br/wp-content/uploads/2018/03/29258000_1627576133985233_949067822569357312_n.jpg",
+      "trailer_link": "https://www.youtube.com/watch?v=t_ULBP6V9bg",
+      "id": 1
     },
     {
       "genero_id": "3",
-      "titulo": "VAI SE FUDE N AGUENTO MAIS ESSA MERDA",
-      "ano_lancamento": "2019",
-      "idioma": "pUtONES",
-      "duracao": "1 MILHÃO DE ANOS NESSA CARALHA",
-      "sinopse": "ATÉ QUE ENFIM CARALHO, VO DORMIR PORRA",
-      "poster_link": "https://data.whicdn.com/images/309804438/large.jpg",
-      "trailer_link": "https://tiny.cc/o7hy8y",
+      "titulo": "Psicose",
+      "ano_lancamento": "1960",
+      "idioma": "PT-BR",
+      "duracao": "1h 49min",
+      "sinopse": "Marion Crane é uma secretária (Janet Leigh) que rouba 40 mil dólares da imobiliária onde trabalha para se casar e começar uma nova vida. Durante a fuga à carro, ela enfrenta uma forte tempestade, erra o caminho e chega em um velho hotel.",
+      "poster_link": "https://br.web.img2.acsta.net/c_210_280/pictures/14/10/07/20/12/205686.jpg",
+      "trailer_link": "https://www.youtube.com/watch?v=wfGjWZmyvfo",
+      "id": 2
+    },
+    {
+      "genero_id": "1",
+      "titulo": "Toy Story",
+      "ano_lancamento": "1995",
+      "idioma": "PT-BR",
+      "duracao": "1h 17min",
+      "sinopse": "O aniversário de Andy está chegando e os brinquedos estão nervosos. Afinal de contas, eles temem que um novo brinquedo possa substituí-los. Liderados por Woody, um caubói que é também o brinquedo predileto de Andy, eles montam uma escuta que lhes permite saber dos presentes ganhos.",
+      "poster_link": "https://br.web.img3.acsta.net/c_210_280/medias/nmedia/18/91/05/36/20127436.jpg",
+      "trailer_link": "https://www.youtube.com/watch?v=rNk1Wi8SvNc",
       "id": 3
     }
   ],
   "emcartaz": [
     {
-      "filme_id": "2",
-      "sala_id": "2",
-      "horario": "2",
+      "filme_id": "1",
+      "sala_id": "1",
+      "horario": "15 horas",
       "ativo": "Sim",
-      "restante": "0",
+      "restante": "28",
       "id": 1
     },
     {
-      "filme_id": "3",
+      "filme_id": "2",
       "sala_id": "2",
-      "horario": "2",
+      "horario": "22 horas",
       "ativo": "Sim",
-      "restante": "10",
+      "restante": "9",
       "id": 2
     },
     {
       "filme_id": "3",
-      "sala_id": "1",
-      "horario": "1",
+      "sala_id": "3",
+      "horario": "16 horas",
       "ativo": "Sim",
-      "restante": "0",
+      "restante": "9",
       "id": 3
+    },
+    {
+      "sala_id": "3",
+      "filme_id": "1",
+      "horario": "23 horas",
+      "ativo": "Não",
+      "restante": "10",
+      "id": 4
     }
   ],
   "bilheterias": [
     {
-      "emcartaz_id": "3",
-      "tipoingresso_id": "1",
-      "quantidade": "3",
-      "id": 1
-    },
-    {
       "emcartaz_id": "1",
       "tipoingresso_id": "1",
       "quantidade": "2",
+      "id": 1
+    },
+    {
+      "emcartaz_id": "3",
+      "tipoingresso_id": "3",
+      "quantidade": "1",
       "id": 2
-    },
-    {
-      "emcartaz_id": "1",
-      "tipoingresso_id": "1",
-      "quantidade": "8",
-      "id": 3
-    },
-    {
-      "emcartaz_id": "1",
-      "tipoingresso_id": "1",
-      "quantidade": "1",
-      "id": 4
-    },
-    {
-      "emcartaz_id": "1",
-      "tipoingresso_id": "1",
-      "quantidade": "1",
-      "id": 5
-    },
-    {
-      "emcartaz_id": "2",
-      "tipoingresso_id": "1",
-      "quantidade": "1",
-      "id": 6
     },
     {
       "emcartaz_id": "2",
       "tipoingresso_id": "2",
-      "quantidade": "1",
-      "id": 7
+      "quantidade": "3",
+      "id": 3
     }
   ]
 }
