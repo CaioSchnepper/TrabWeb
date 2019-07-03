@@ -1,4 +1,12 @@
 $(document).ready(function(){
+    // SETA ALTURA DO CONTAINER CENTRAL
+    var $logo = $("#logo");
+    var $container = $("#container");
+    var $footer = $("#footer");
+	var $body = $("body");
+	var result = ($body.height() - $logo.height() - $footer.height());
+	$container.css("height", result);
+
     var serverURL = 'http://localhost:3000/filmes';
     var $tcorpo = $("#tcorpo");
     var $modalAdicionar = $("#modalAdicionar");

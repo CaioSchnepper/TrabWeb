@@ -7,34 +7,33 @@
     <title>Sistema Cinema - Relatórios</title>
 </head>
 <body class="h-100 bg-dark">
-	<h1 class="bg-light text-center p-4">
-		<a href="../index.html" class="text-dark">Sistema</a>
-		<button type="button" class="btn btn-danger float-right">Sair</button>
-	</h1>
-	<div class="container-fluid h-75 d-flex text-center align-items-center overflow-auto">
-		<div id="ccorpo" class="container text-light">
-			<div class="row d-flex justify-content-center">
-				<button id="usuarios" type="button" class="adicionar col btn btn-secondary m-2" style="width: 10vw; height: 10vw;">
+	<header id="logo" class="bg-light d-flex justify-content-center align-items-center" style="height: 15%;">
+		<a href="../index.html" class="text-dark position-absolute display-4">Sistema</a>
+		<button id="sair" type="button" class="btn btn-danger ml-auto mr-4">Sair</button>
+	</header>
+
+	<div id="container" class="container-fluid overflow-auto">
+		<div id="ccorpo" class="container text-light h-100 d-flex justify-content-center align-items-center">
+			<div class="row d-flex justify-content-center align-items-center" style="max-height: 100%;">
+				<button id="usuarios" type="button" class="adicionar btn btn-secondary col-6 col-xs-3 col-sm-4 col-md-4 col-lg-3 m-3 flex-fill p-5">
 					Lista de usuários
 				</button>
-				<button id="generos" type="button" class="adicionar col btn btn-secondary m-2" style="width: 10vw; height: 10vw;">
+				<button id="generos" type="button" class="adicionar btn btn-secondary col-6 col-xs-3 col-sm-4 col-md-4 col-lg-3 m-3 flex-fill p-5">
 					Gêneros dos filmes
 				</button>
-				<button id="salas" type="button" class="adicionar col btn btn-secondary m-2" style="width: 10vw; height: 10vw;">
+				<button id="salas" type="button" class="adicionar btn btn-secondary col-6 col-xs-3 col-sm-4 col-md-4 col-lg-3 m-3 flex-fill p-5">
 					Salas da unidade
 				</button>
-				<button id="tipoingresso" type="button" class="adicionar col btn btn-secondary m-2" style="width: 10vw; height: 10vw;">
+				<button id="tipoingresso" type="button" class="adicionar btn btn-secondary col-6 col-xs-3 col-sm-4 col-md-4 col-lg-3 m-3 flex-fill p-5">
 					Tipos dos ingressos
 				</button>
-			</div>
-			<div class="row d-flex justify-content-center">
-				<button id="filmes" type="button" class="adicionar col btn btn-secondary m-2" style="width: 10vw; height: 10vw;">
+				<button id="filmes" type="button" class="adicionar btn btn-secondary col-6 col-xs-3 col-sm-4 col-md-4 col-lg-3 m-3 flex-fill p-5">
 					Filmes
 				</button>
-				<button id="emcartaz" type="button" class="adicionar col btn btn-secondary m-2" style="width: 10vw; height: 10vw;">
+				<button id="emcartaz" type="button" class="adicionar btn btn-secondary col-6 col-xs-3 col-sm-4 col-md-4 col-lg-3 m-3 flex-fill p-5">
 					Filmes em cartaz
 				</button>
-				<button id="bilheterias" type="button" class="adicionar col btn btn-secondary m-2" style="width: 10vw; height: 10vw;">
+				<button id="bilheterias" type="button" class="adicionar btn btn-secondary col-6 col-xs-3 col-sm-4 col-md-4 col-lg-3 m-3 flex-fill p-5">
 					Total de ingressos vendidos
 				</button>
 			</div>
@@ -66,7 +65,7 @@
 		</div>
 	</div>
 	
-	<footer class="bg-light text-center p-1 mt-2">Desenvolvido pelos mano da quebrada</footer>
+	<footer id="footer" class="bg-light d-flex align-items-center justify-content-center" style="height: 5%;">Desenvolvido por Caio Schnepper e Eric K. Ueta</footer>
 	
 	<script src="../js/jquery-3.4.1.js"></script>
 	<script src="../js/bootstrap.bundle.min.js"></script>
