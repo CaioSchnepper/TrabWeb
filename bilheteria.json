@@ -7,23 +7,18 @@
     },
     {
       "usuario": "eric",
-      "senha": "8",
+      "senha": "senha123",
       "id": 2
     },
     {
-      "usuario": "321321",
-      "senha": "5",
+      "usuario": "caio",
+      "senha": "123456",
       "id": 3
     },
     {
-      "usuario": "2",
-      "senha": "2",
+      "usuario": "cleiton",
+      "senha": "55555",
       "id": 4
-    },
-    {
-      "usuario": "2",
-      "senha": "5",
-      "id": 5
     }
   ],
   "generos": [
@@ -46,10 +41,6 @@
     {
       "genero": "Suspense",
       "id": 5
-    },
-    {
-      "genero": "Aventura",
-      "id": 6
     }
   ],
   "salas": [
@@ -60,6 +51,11 @@
     {
       "lotacao_maxima": "12",
       "id": 2
+    },
+    {
+      "lotacao_maxima": "10",
+      "restante": "0",
+      "id": 3
     }
   ],
   "tipoingresso": [
@@ -72,6 +68,11 @@
       "id": 2,
       "descricao": "Meia",
       "valor": 10
+    },
+    {
+      "descricao": "Insento",
+      "valor": "0",
+      "id": 3
     }
   ],
   "filmes": [
@@ -100,53 +101,48 @@
   ],
   "emcartaz": [
     {
-      "filme_id": "1",
-      "sala_id": "1",
-      "horario": "15 horas",
-      "ativo": "Não",
-      "id": 1
-    },
-    {
-      "filme_id": "1",
-      "sala_id": "1",
-      "horario": "1",
-      "ativo": "Não",
-      "id": 2
-    },
-    {
       "filme_id": "2",
       "sala_id": "2",
       "horario": "2",
-      "ativo": "Não",
-      "id": 3
+      "ativo": "Sim",
+      "restante": "2",
+      "id": 1
+    },
+    {
+      "filme_id": "3",
+      "sala_id": "2",
+      "horario": "2",
+      "ativo": "Sim",
+      "restante": "12",
+      "id": 2
     },
     {
       "filme_id": "3",
       "sala_id": "1",
-      "horario": "4",
-      "ativo": "Não",
-      "id": 4
-    },
-    {
-      "filme_id": "4",
-      "sala_id": "1",
-      "horario": "4",
-      "ativo": "Não",
-      "id": 5
+      "horario": "1",
+      "ativo": "Sim",
+      "restante": "0",
+      "id": 3
     }
   ],
   "bilheterias": [
     {
-      "id": 1,
-      "emcartaz_id": 1,
-      "tipoingresso_id": 1,
-      "quantidade": 2
+      "emcartaz_id": "3",
+      "tipoingresso_id": "1",
+      "quantidade": "3",
+      "id": 1
     },
     {
-      "id": 2,
-      "emcartaz_id": 1,
-      "tipoingresso_id": 2,
-      "quantidade": 1
+      "emcartaz_id": "1",
+      "tipoingresso_id": "1",
+      "quantidade": "2",
+      "id": 2
+    },
+    {
+      "emcartaz_id": "1",
+      "tipoingresso_id": "1",
+      "quantidade": "8",
+      "id": 3
     }
   ]
 }

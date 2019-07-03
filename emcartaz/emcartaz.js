@@ -10,7 +10,7 @@ $(document).ready(function(){
     function addCartaz(emcartaz, nomeFilme){
         $tcorpo.append("<tr><th scope='row'>" + emcartaz.id + "</th><td class='sala_id'>" + emcartaz.sala_id + "</td><td class='filme_id'>"
         + emcartaz.filme_id + "</td><td class='nomeFilme'>" + nomeFilme + "</td><td class='horario'>" + emcartaz.horario + 
-        "</td><td><button type='button' class='botaoAtivar btn " + ativar(emcartaz.ativo) + "'>" + emcartaz.ativo + "</button></td><td><button type='button' class='editarIdFilme btn btn-warning' data-id='"+ emcartaz.id +
+        "</td><td><button type='button' class='botaoAtivar btn " + ativar(emcartaz.ativo) + "'>" + emcartaz.ativo + "</button></td><td><button data-restante='"+emcartaz.restante+"'type='button' class='editarIdFilme btn btn-warning' data-id='"+ emcartaz.id +
         "'>Alterar dados</button></td><td><button type='button' class='apagar btn btn-danger' data-id='" + emcartaz.id + "'>Apagar</button></td></tr>");
     }
     
@@ -69,30 +69,40 @@ $(document).ready(function(){
         if (linha.querySelector('.botaoAtivar').textContent == "Não"){
             var troca = "Sim";
         } else if (linha.querySelector('.botaoAtivar').textContent == "Sim" || linha.querySelector('.botaoAtivar').textContent == true){
+            if(!confirm("Você realmente deseja desativar o filme? A sala será liberada.")){
+                return;
+            }
             var troca = "Não";
         }
-        var filme = {
-            filme_id: linha.querySelector('.filme_id').textContent,
-            sala_id: linha.querySelector('.sala_id').textContent,
-            horario: linha.querySelector('.horario').textContent,
-            ativo: troca,
-        };
         $.ajax({
-            url: serverURL + "/" + linhaID,
-            type: 'PUT',    
-            data: filme,
-            success: function(response) {
-                linha.querySelector('.botaoAtivar').textContent = troca;
-                if (linha.querySelector('.botaoAtivar').classList.contains("btn-danger")) {
-                    linha.querySelector('.botaoAtivar').classList.remove("btn-danger");
-                    linha.querySelector('.botaoAtivar').classList.add("btn-success");
-                } else if (linha.querySelector('.botaoAtivar').classList.contains("btn-success")) {
-                    linha.querySelector('.botaoAtivar').classList.remove("btn-success");
-                    linha.querySelector('.botaoAtivar').classList.add("btn-danger");
-                }
-            },
-            error: function() {
-                //alert("Erro ao ativar o filme);
+            type: 'GET',
+            url: "http://localhost:3000/salas/"+linha.querySelector('.sala_id').textContent,
+            success: function(salaData){
+                var filme = {
+                    filme_id: linha.querySelector('.filme_id').textContent,
+                    sala_id: linha.querySelector('.sala_id').textContent,
+                    horario: linha.querySelector('.horario').textContent,
+                    ativo: troca,
+                    restante: salaData.lotacao_maxima,
+                };
+                $.ajax({
+                    url: serverURL + "/" + linhaID,
+                    type: 'PUT',    
+                    data: filme,
+                    success: function(response) {
+                        linha.querySelector('.botaoAtivar').textContent = troca;
+                        if (linha.querySelector('.botaoAtivar').classList.contains("btn-danger")) {
+                            linha.querySelector('.botaoAtivar').classList.remove("btn-danger");
+                            linha.querySelector('.botaoAtivar').classList.add("btn-success");
+                        } else if (linha.querySelector('.botaoAtivar').classList.contains("btn-success")) {
+                            linha.querySelector('.botaoAtivar').classList.remove("btn-success");
+                            linha.querySelector('.botaoAtivar').classList.add("btn-danger");
+                        }
+                    },
+                    error: function() {
+                        //alert("Erro ao ativar o filme);
+                    },
+                });
             },
         });
     });
@@ -101,8 +111,8 @@ $(document).ready(function(){
     $tcorpo.delegate(".editarIdFilme","click",function(){
         linha = this.parentNode.parentNode;
         linhaID = linha.firstChild.textContent;
+        ingRest = $(this).attr("data-restante");
         $modalAlterar.modal('show');
-        
         $formAlterar.on('submit', function(form){
             form.preventDefault();
             form.stopImmediatePropagation();
@@ -117,6 +127,7 @@ $(document).ready(function(){
                     sala_id: linha.querySelector('.sala_id').textContent,
                     horario: linha.querySelector('.horario').textContent,
                     ativo: linha.querySelector('.botaoAtivar').textContent,
+                    restante: ingRest,
                 };
                 $.ajax({
                     url: serverURL + "/" + linhaID,
@@ -155,7 +166,6 @@ $(document).ready(function(){
         var addIdFilme = document.querySelector("#inputAddIdFilme");
         var addHorario = document.querySelector("#inputAddHorario");
         var erro = false;
-
         if (addSala.value == '' || addSala.value == null) {
             addSala.classList.add('border-danger');
             erro = true;
@@ -181,44 +191,51 @@ $(document).ready(function(){
             return;
         }
         else{
-            var filme = {
-                sala_id: addSala.value,
-                filme_id: addIdFilme.value,
-                horario: addHorario.value,
-                ativo: "Não",
-            };
-            addSala.classList.remove('border-success');
-            addIdFilme.classList.remove('border-success');
-            addHorario.classList.remove('border-success');
             $.ajax({
-                type: 'POST',
-                url: serverURL,
-                data: filme,
-                success: function(adicionar){
+                type: 'GET',
+                url: "http://localhost:3000/salas/"+addSala.value,
+                success: function(dataSala){
+                    var filme = {
+                        sala_id: addSala.value,
+                        filme_id: addIdFilme.value,
+                        horario: addHorario.value,
+                        ativo: "Não",
+                        restante: dataSala.lotacao_maxima,
+                    };
+                    addSala.classList.remove('border-success');
+                    addIdFilme.classList.remove('border-success');
+                    addHorario.classList.remove('border-success');
                     $.ajax({
-                        type: 'GET',
-                        url: 'http://localhost:3000/filmes/' + adicionar.filme_id,
-                        success: function(dataFilme){
-                            var nomeFilme = dataFilme.titulo;
-                            addCartaz(adicionar, nomeFilme);
-                            $("#modalAdicionar").modal('hide');
-                            alert("Filme adicionado com sucesso");  
-                            addSala.value = '';
-                            addIdFilme.value = '';
-                            addHorario.value = '';
-                        },
-                        error: function() {
-                            //alert("Erro ao carregar o filme com ID: " + emcartaz.filme_id);
-                            var nomeFilme = "Não existente";
-                            addCartaz(adicionar, nomeFilme);
-                            $("#modalAdicionar").modal('hide');
-                            alert("Filme adicionado com sucesso");  
-                            addSala.value = '';
-                            addIdFilme.value = '';
-                            addHorario.value = '';
-                        },
+                        type: 'POST',
+                        url: serverURL,
+                        data: filme,
+                        success: function(adicionar){
+                            $.ajax({
+                                type: 'GET',
+                                url: 'http://localhost:3000/filmes/' + adicionar.filme_id,
+                                success: function(dataFilme){
+                                    var nomeFilme = dataFilme.titulo;
+                                    addCartaz(adicionar, nomeFilme);
+                                    $("#modalAdicionar").modal('hide');
+                                    alert("Filme adicionado com sucesso");  
+                                    addSala.value = '';
+                                    addIdFilme.value = '';
+                                    addHorario.value = '';
+                                },
+                                error: function() {
+                                    //alert("Erro ao carregar o filme com ID: " + emcartaz.filme_id);
+                                    var nomeFilme = "Não existente";
+                                    addCartaz(adicionar, nomeFilme);
+                                    $("#modalAdicionar").modal('hide');
+                                    alert("Filme adicionado com sucesso");  
+                                    addSala.value = '';
+                                    addIdFilme.value = '';
+                                    addHorario.value = '';
+                                },
+                            });
+                        }
                     });
-                }
+                },
             });
         }
     });

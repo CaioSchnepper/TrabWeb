@@ -55,7 +55,6 @@ $(document).ready(function(){
             } else {
                 var lot = {
                     lotacao_maxima: editLot.value,
-                    restante : editLot.value,
                 };
                 $.ajax({
                     url: serverURL + "/" + linha.firstChild.textContent,
@@ -84,7 +83,6 @@ $(document).ready(function(){
             addLotacao.classList.add('border-success');
             var nSala = {
                 lotacao_maxima: addLotacao.value,
-                restante: addLotacao.value,
             };
             addLotacao.classList.remove('border-success');
             $.ajax({
